@@ -9,20 +9,13 @@ function mainMenu () {
         if (selectedIndex == 0) {
             startGame()
         } else if (selectedIndex == 1) {
-            upgradesMenu()
+            game.showLongText("UNDER CONSTRUCTION AVAILABLE NEXT UPDATE!", DialogLayout.Center)
+            mainMenu()
         } else if (selectedIndex == 2) {
             game.showLongText("You are Galiger No. " + galigerNo + ", with " + kills + " kills in your career!", DialogLayout.Center)
             mainMenu()
         }
     })
-}
-function upgradesMenu () {
-    myMenu2 = miniMenu.createMenu(
-    miniMenu.createMenuItem("Back"),
-    miniMenu.createMenuItem("Ammo Increase -- 5 kills per increase"),
-    miniMenu.createMenuItem("SMG Strike -- 50 kills"),
-    miniMenu.createMenuItem("Piercing Shots -- 70 kills")
-    )
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (canShoot) {
@@ -83,7 +76,9 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     canShoot = false
     enemiesCanCome = false
     pause(1500)
-    game.reset()
+    sprites.destroy(myTextSprite2)
+    sprites.destroy(statusbar)
+    mainMenu()
 })
 info.onScore(0, function () {
     canShoot = false
@@ -114,7 +109,6 @@ let enemiesCanCome = false
 let mySprite: Sprite = null
 let projectile: Sprite = null
 let canShoot = false
-let myMenu2: Sprite = null
 let myMenu: Sprite = null
 let galigerNo = 0
 let ammo = 0
